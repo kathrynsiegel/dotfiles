@@ -1,10 +1,10 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#begin()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#rc()
 
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/vundle.vim'
 
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -24,18 +24,27 @@ Plugin 'skammer/vim-css-color'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'fatih/vim-go'
+Plugin 'leafgarland/typescript-vim'
 
 Plugin 'kien/ctrlp.vim'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Plugin 'mxw/vim-jsx'
 
-call vundle#end()
+let g:python_host_prog = "/Users/ksiegel/.virtualenvs/vim-python/bin/python"
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+let g:syntastic_javascript_checkers = ['eslint']
 
-set hlsearch
+syntax on
+set hidden
+set number
 set incsearch
+set hlsearch
+
 set showmatch
 set smartcase
 set ignorecase
+set completeopt=menuone
 
-syntax enable
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -43,7 +52,6 @@ set smarttab
 set expandtab
 set mouse=a
 set backspace=indent,eol,start
-set number
 let mapleader = ","
 let g:maplead = ","
 filetype plugin indent on
@@ -51,9 +59,17 @@ set autoindent
 au BufNewFile,BufRead *.ejs set filetype=html
 
 " Go
+autocmd FileType go setlocal tabstop=2|setlocal shiftwidth=2|setlocal softtabstop=2|setlocal noexpandtab
+autocmd FileType go compiler go
+au FileType go nmap gd <Plug>(go-def)
 let g:go_fmt_command = "goimports"
-let g:syntastic_go_checkers = ['golint', 'errcheck']
 let g:airline#extensions#tabline#enabled = 1
+" turn highlighting on
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
 " ctrlp
 map ff :CtrlP<.><cr>
@@ -75,8 +91,7 @@ map <C-n> :NERDTreeTabsToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
 let NERDTreeDirArrows = 1
 
-colorscheme vj
-"colorscheme summerfruit256
+colorscheme molokai
 
 map <c-j> <c-w>j
 map <c-k> <c-w>k
@@ -96,14 +111,12 @@ set guioptions+=lrb
 set guioptions-=lrb
 
 let g:ycm_autoclose_preview_window_after_completion=1
+" let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 " Syntastic settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-let g:syntastic_python_checkers = ['pyflakes']
-let g:synastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = '-std=c++11'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -111,9 +124,18 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_mode_map = { "mode": "active", "active_filetypes": [], "passive_filetypes": ["tex"] }
-let g:syntastic_python_python_exec = '/usr/bin/local/python'
 let g:syntastic_check_on_open = 1
+" Python
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_flake8_args='--max-line-length=100'
+" C++
+let g:synastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = '-std=c++11'
+" Go
+let g:syntastic_go_checkers = ['go', 'errcheck', 'govet']
 nnoremap <F8> :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+
+
 
 " Airline settings
 let g:Powerline_symbols = 'fancy'

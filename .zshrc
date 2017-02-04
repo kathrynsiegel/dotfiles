@@ -1,8 +1,17 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-export SPARK=/Users/kathrynsiegel/Development/spark
-export GOPATH=/Users/kathrynsiegel/Development/go
-export PATH=/usr/local/sbin:/usr/local/bin:$PATH:$GOPATH/bin
+
+export GOPATH="/Users/ksiegel/dev/backend/go"
+export GO15VENDOREXPERIMENT=1
+export PATH="/usr/local/go/bin:$PATH:$GOPATH/bin"
+export PATH="/Users/ksiegel/Library/Python/2.7/bin:$PATH"
+export NVM_DIR=$HOME/.nvm
+source $(brew --prefix nvm)/nvm.sh
+alias gulp="npm run gulp --silent"
+export GOROOT=/usr/local/go
+GOTOOLDIR="/Users/ksiegel/dev/backend/go/pkg/tool/darwin_amd64"
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -13,16 +22,10 @@ ZSH_THEME="robbyrussell"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias athena="ssh -X ksiegel@athena.dialup.mit.edu"
-alias db="ssh ksiegel@vise3.csail.mit.edu"
-alias 824hw="cd; cd Dropbox\ \(Personal\)/6.824/hw"
-alias aws="ssh -i ~/.ssh/amazon.pem ubuntu@52.4.152.184"
-alias hkn="ssh -i ~/.ssh/hknhours.pem ubuntu@52.20.174.131"
-alias tensorflow="ssh -i ~/.ssh/tensorflow.pem ubuntu@54.85.212.251"
-alias neural-style="ssh -i ~/.ssh/neural-style-web.pem ubuntu@52.90.219.55"
-alias wahoo="ssh -i ~/.ssh/wahooml.pem ubuntu@52.87.248.97"
-alias roomres="ssh -i ~/.ssh/roomres.pem ubuntu@54.152.120.248"
-alias goroot="cd /Users/kathrynsiegel/Development/go"
+alias gotoclient="cd /Users/ksiegel/dev/backend/client"
+alias gotogo="cd /Users/ksiegel/dev/backend/go/src/samsaradev.io"
+alias gotoreports="cd /Users/ksiegel/dev/backend/client/pages/fleet/reports"
+alias gotomobile="cd /Users/ksiegel/dev/backend/mobile/SamsaraDriver"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -61,7 +64,7 @@ alias goroot="cd /Users/kathrynsiegel/Development/go"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git docker brew)
+plugins=(git docker brew fasd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -88,6 +91,6 @@ source $ZSH/oh-my-zsh.sh
 
 ### kerberos
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-export PATH="/Users/kathrynsiegel/Development/spark/bin:$PATH"
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /Users/ksiegel/Library/Python/2.7/bin/virtualenvwrapper.sh
